@@ -7,8 +7,8 @@ namespace App\Service\Nbrb;
 use App\Domain\ValueObject\Currency;
 use DateTimeImmutable;
 use DateTimeInterface;
+use JsonException;
 use Symfony\Contracts\HttpClient\HttpClientInterface;
-use Throwable;
 use function http_build_query;
 use function json_decode;
 
@@ -19,6 +19,10 @@ final class Client
     }
 
     /**
+     * @throws JsonException
+     * @throws \Symfony\Contracts\HttpClient\Exception\ClientExceptionInterface
+     * @throws \Symfony\Contracts\HttpClient\Exception\RedirectionExceptionInterface
+     * @throws \Symfony\Contracts\HttpClient\Exception\ServerExceptionInterface
      * @throws \Symfony\Contracts\HttpClient\Exception\TransportExceptionInterface
      */
     public function getRates(int $id, DateTimeInterface $dateTime): Currency
@@ -28,19 +32,16 @@ final class Client
             "https://www.nbrb.by/api/exrates/rates/{$id}?" . http_build_query(['ondate' => $dateTime->format('Y-m-d')])
         );
 
-        try {
-            /**
-             * @var array{Cur_ID: int, Date: string, Cur_Abbreviation: string, Cur_OfficialRate: float} $data
-             */
-            $data = json_decode($response->getContent(), true, 512, JSON_THROW_ON_ERROR);
+        /**
+         * @var array{Cur_ID: int, Date: string, Cur_Abbreviation: string, Cur_OfficialRate: float} $data
+         */
+        $data = json_decode($response->getContent(), true, 512, JSON_THROW_ON_ERROR);
 
-            return Currency::fromPayload(
-                $data['Cur_ID'],
-                $data['Cur_Abbreviation'],
-                $data['Cur_OfficialRate'],
-                new DateTimeImmutable($data['Date'])
-            );
-        } catch (Throwable $e) {
-        }
+        return Currency::fromPayload(
+            $data['Cur_ID'],
+            $data['Cur_Abbreviation'],
+            $data['Cur_OfficialRate'],
+            new DateTimeImmutable($data['Date'])
+        );
     }
 }
