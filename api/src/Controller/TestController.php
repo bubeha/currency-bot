@@ -16,6 +16,11 @@ final class TestController
     }
 
     /**
+     * @return \App\Response\OpenApi
+     * @throws \JsonException
+     * @throws \Symfony\Contracts\HttpClient\Exception\ClientExceptionInterface
+     * @throws \Symfony\Contracts\HttpClient\Exception\RedirectionExceptionInterface
+     * @throws \Symfony\Contracts\HttpClient\Exception\ServerExceptionInterface
      * @throws \Symfony\Contracts\HttpClient\Exception\TransportExceptionInterface
      */
     #[Route(path: '/test', methods: ['GET', 'HEAD'])]
