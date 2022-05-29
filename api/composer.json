@@ -19,6 +19,7 @@
         "friendsofphp/php-cs-fixer": "^3.8",
         "overtrue/phplint": "^5.0",
         "phpunit/phpunit": "^9.5",
+        "psalm/plugin-phpunit": "^0.16.1",
         "psalm/plugin-symfony": "^3.1",
         "roave/security-advisories": "dev-latest",
         "symfony/browser-kit": "6.1.*",

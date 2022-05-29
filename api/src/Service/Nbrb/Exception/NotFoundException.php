@@ -16,6 +16,6 @@ final class NotFoundException extends RuntimeException
 
     public static function fromPayload(DateTimeInterface $dateTime): self
     {
-        return new self( "Can't find current for that day: {$dateTime->format('Y-m-d H:i:s')}");
+        return new self("Can't find current for that day: {$dateTime->format('Y-m-d H:i:s')}");
     }
 }

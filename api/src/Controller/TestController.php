@@ -8,6 +8,7 @@ use App\Response\OpenApi;
 use App\Service\Nbrb\Client;
 use DateTimeImmutable;
 use Symfony\Component\Routing\Annotation\Route;
+use Throwable;
 
 final class TestController
 {
@@ -16,12 +17,7 @@ final class TestController
     }
 
     /**
-     * @return \App\Response\OpenApi
-     * @throws \JsonException
-     * @throws \Symfony\Contracts\HttpClient\Exception\ClientExceptionInterface
-     * @throws \Symfony\Contracts\HttpClient\Exception\RedirectionExceptionInterface
-     * @throws \Symfony\Contracts\HttpClient\Exception\ServerExceptionInterface
-     * @throws \Symfony\Contracts\HttpClient\Exception\TransportExceptionInterface
+     * @throws Throwable
      */
     #[Route(path: '/test', methods: ['GET', 'HEAD'])]
     public function test(): OpenApi
