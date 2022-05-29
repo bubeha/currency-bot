@@ -6,9 +6,10 @@ namespace App\Controller;
 
 use App\Response\OpenApi;
 use App\Service\Nbrb\Client;
+use DateTimeImmutable;
 use Symfony\Component\Routing\Annotation\Route;
 
-class TestController
+final class TestController
 {
     public function __construct(private Client $client)
     {
@@ -17,11 +18,11 @@ class TestController
     /**
      * @throws \Symfony\Contracts\HttpClient\Exception\TransportExceptionInterface
      */
-    #[Route(path: "/test", methods: ["GET", "HEAD"])]
+    #[Route(path: '/test', methods: ['GET', 'HEAD'])]
     public function test(): OpenApi
     {
         return OpenApi::fromPayload(
-            $this->client->getRates(431, new \DateTimeImmutable('-1 day'))
+            $this->client->getRates(431, new DateTimeImmutable('-1 day'))
         );
     }
 }

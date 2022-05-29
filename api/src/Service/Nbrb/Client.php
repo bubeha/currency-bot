@@ -5,14 +5,17 @@ declare(strict_types=1);
 namespace App\Service\Nbrb;
 
 use App\Domain\ValueObject\Currency;
+use DateTimeImmutable;
 use DateTimeInterface;
 use Symfony\Contracts\HttpClient\HttpClientInterface;
+use Throwable;
+use function http_build_query;
+use function json_decode;
 
-class Client
+final class Client
 {
     public function __construct(private HttpClientInterface $client)
     {
-
     }
 
     /**
@@ -35,9 +38,9 @@ class Client
                 $data['Cur_ID'],
                 $data['Cur_Abbreviation'],
                 $data['Cur_OfficialRate'],
-                new \DateTimeImmutable($data['Date'])
+                new DateTimeImmutable($data['Date'])
             );
-        } catch (\Throwable $e) {
+        } catch (Throwable $e) {
         }
     }
 }

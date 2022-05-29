@@ -7,7 +7,7 @@ namespace App\Domain\ValueObject;
 use DateTimeImmutable;
 use JsonSerializable;
 
-class Currency implements JsonSerializable
+final class Currency implements JsonSerializable
 {
     public function __construct(
         private int $id,
