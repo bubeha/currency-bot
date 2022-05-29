@@ -2,6 +2,9 @@
     "doctrine/instantiator": {
         "version": "1.4.1"
     },
+    "masterminds/html5": {
+        "version": "2.7.5"
+    },
     "myclabs/deep-copy": {
         "version": "1.11.0"
     },
