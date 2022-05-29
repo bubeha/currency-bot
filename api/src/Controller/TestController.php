@@ -27,7 +27,7 @@ final class TestController
     public function test(): OpenApi
     {
         return OpenApi::fromPayload(
-            $this->client->getRates(431, new DateTimeImmutable('-1 day'))
+            $this->client->getRates(431, new DateTimeImmutable('+2 day'))
         );
     }
 }
