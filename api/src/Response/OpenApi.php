@@ -8,12 +8,7 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 
 final class OpenApi extends JsonResponse
 {
-    public $headers = [];
     protected $charset = 'UTF-8';
-    protected $content = '';
-    protected $version = '1.0';
-    protected $statusCode = self::HTTP_OK;
-    protected $statusText = '';
 
     private function __construct(mixed $data = null, int $status = self::HTTP_OK, array $headers = [])
     {

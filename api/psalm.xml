@@ -6,9 +6,11 @@
         xmlns="https://getpsalm.org/schema/config"
         xsi:schemaLocation="https://getpsalm.org/schema/config vendor/vimeo/psalm/config.xsd"
         cacheDirectory="./var/cache/.psalm"
+        allowStringToStandInForClass="true"
 >
     <plugins>
-        <pluginClass class="Psalm\SymfonyPsalmPlugin\Plugin"/></plugins>
+        <pluginClass class="Psalm\PhpUnitPlugin\Plugin"/>
+    </plugins>
 
     <projectFiles>
         <directory name="bin"/>
@@ -16,6 +18,7 @@
         <directory name="public"/>
         <directory name="src"/>
         <directory name="tests"/>
+
         <ignoreFiles>
             <directory name="vendor"/>
         </ignoreFiles>
@@ -23,5 +26,6 @@
 
     <issueHandlers>
         <LessSpecificReturnType errorLevel="info"/>
+        <DeprecatedClass errorLevel="info"/>
     </issueHandlers>
 </psalm>

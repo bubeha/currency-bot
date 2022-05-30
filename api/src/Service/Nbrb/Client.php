@@ -8,9 +8,9 @@ use App\Domain\ValueObject\Currency;
 use App\Service\Nbrb\Exception\NotFoundException;
 use DateTimeImmutable;
 use DateTimeInterface;
-use JsonException;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Contracts\HttpClient\HttpClientInterface;
+use Throwable;
 use function http_build_query;
 use function json_decode;
 
@@ -21,12 +21,7 @@ final class Client
     }
 
     /**
-     * @throws JsonException
-     * @throws \Symfony\Contracts\HttpClient\Exception\ClientExceptionInterface
-     * @throws \Symfony\Contracts\HttpClient\Exception\RedirectionExceptionInterface
-     * @throws \Symfony\Contracts\HttpClient\Exception\ServerExceptionInterface
-     * @throws \Symfony\Contracts\HttpClient\Exception\TransportExceptionInterface
-     * @throws \Exception
+     * @throws Throwable
      */
     public function getRates(int $id, DateTimeInterface $date): Currency
     {
@@ -35,7 +30,7 @@ final class Client
             "https://www.nbrb.by/api/exrates/rates/{$id}?" . http_build_query(['date' => $date->format('Y-m-d')])
         );
 
-        if ($response->getStatusCode() !== Response::HTTP_OK) {
+        if (Response::HTTP_OK !== $response->getStatusCode()) {
             throw NotFoundException::fromPayload($date);
         }
 
