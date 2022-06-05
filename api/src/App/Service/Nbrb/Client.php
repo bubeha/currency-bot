@@ -23,15 +23,18 @@ final class Client
     /**
      * @throws Throwable
      */
-    public function getRates(int $id, DateTimeInterface $date): Currency
+    public function getRates(string $currency, DateTimeInterface $date): Currency
     {
         $response = $this->client->request(
             'GET',
-            "https://www.nbrb.by/api/exrates/rates/{$id}?" . http_build_query(['date' => $date->format('Y-m-d')])
+            "https://www.nbrb.by/api/exrates/rates/{$currency}?" . http_build_query([
+                'parammode' => 2,
+                'ondate' => $date->format('Y-m-d'),
+            ])
         );
 
         if (Response::HTTP_OK !== $response->getStatusCode()) {
-            throw NotFoundException::fromPayload($date);
+            throw NotFoundException::fromDate($date);
         }
 
         /**
