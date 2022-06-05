@@ -2,7 +2,9 @@
 
 declare(strict_types=1);
 
-use App\Response\OpenApi;
+namespace Tests\UI\Http\Rest\Response;
+
+use UI\Http\Rest\Response\OpenApi;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -13,7 +15,7 @@ final class OpenApiTest extends TestCase
 {
     /**
      * @group unit
-     * @throws JsonException
+     * @throws \JsonException
      */
     public function testFromPayload(): void
     {

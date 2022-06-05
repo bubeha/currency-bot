@@ -10,10 +10,10 @@ use JsonSerializable;
 final class Currency implements JsonSerializable
 {
     public function __construct(
-        private int $id,
-        private string $abbreviation,
-        private float $rate,
-        private DateTimeImmutable $date
+        private readonly int $id,
+        private readonly string $abbreviation,
+        private readonly float $rate,
+        private readonly DateTimeImmutable $date
     ) {
     }
 
